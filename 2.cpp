@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -7,18 +8,17 @@ int main()
     system("chcp 65001");
     system("cls");
 
-    cout << "Введите числа (отрицательное для окончания ввода): ";
-    int n, result = 0, i = 0;
+    string input;
+    int c =1;
 
-    do {
-        cin >> n;
-        if (n > 0) {
-            result += n;
-            i++;
+    cout << "Введите строку: ";
+    getline(cin, input);
+
+    for (size_t i = 0; i < input.size(); i++) {
+        if (input[i] == ' ') {
+            c++;
         }
-    } while (n > 0);
-
-    cout << "\nРезультат: " << result / i;
-
+    }
+    cout << "Количество слов: " << c;
     return 0;
 }

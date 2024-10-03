@@ -1,30 +1,26 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-int main()
-{    
-    system("chcp 65001");
-    system("cls");
+int main() 
+{
+    string input, oldWord, newWord;
 
-    int n;
-    int result;
-    cout << "Введите число: ";
-    cin >> n;
-    int check = n;
+    cout << "Введите строку: ";
+    getline(cin, input);
 
-    // я использовал тот же принцип что и в первой задача
-    // так что для него не нужен цикл for
-    for (int i = 0; n > 0; i++) {
-        result = result * 10 + n % 10;
-        n /= 10;
+    cout << "Введите слово для замены: ";
+    getline(cin, oldWord);
+    
+    cout << "Введите новое слово: ";
+    getline(cin, newWord);
+    
+    size_t pos = 0;
+
+    while ((pos = input.find(oldWord, pos)) != string::npos) {
+        input.replace(pos, oldWord.length(), newWord);
     }
-
-    if (result == check) {
-        cout << "Число является палиндромом";
-    } else {
-        cout << "Число не является палиндромом";
-    }
-
+    cout << "Результат: " << input;
     return 0;
 }

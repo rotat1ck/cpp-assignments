@@ -1,24 +1,26 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-int main() 
-{
+int main() {
     system("chcp 65001");
     system("cls");
 
-    int n;
-    int result = 0;
-
-    cout << "Введите число: ";
-    cin >> n;
-
-    while (n > 0) {
-        result = result * 10 + n % 10;
-        n /= 10;
+    string input;
+    char chr;
+    cout << "Введите строку: ";
+    getline(cin, input);
+    cout << "Введите символ для удаления: ";
+    cin >> chr;
+    for (size_t i =0; i < input.size(); i++) {
+        if (input[i] == chr) {
+            input.erase(i, 1);
+            i--;
+        }
     }
-
-    cout << "Результат: " << result;
-
+    cout << input;
     return 0;
+    
+
 }
