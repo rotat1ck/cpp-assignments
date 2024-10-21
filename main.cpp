@@ -26,7 +26,7 @@ int main ()
     if (roll == 1) {
         result = "зеленое";
     } else if (roll % 2 == 0) {
-        result = "черное";
+        result = "красное";
     } else {
         result = "черное";
     }
