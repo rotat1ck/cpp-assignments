@@ -79,8 +79,6 @@ bool drawResult(vector<int> &guess, vector<int> &playerNumber) {
 
 void startGame(vector<int> &playerNumber) {
     int triesLeft = 6;
-    
-    system("cls");  
 
     while (triesLeft != 0) {
         cout << "Введите 4 значное число, осталось " << triesLeft << " попыток: ";
