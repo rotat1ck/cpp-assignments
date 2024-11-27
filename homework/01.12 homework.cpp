@@ -46,7 +46,6 @@ int six(const vector<int> &nums, int &n) {
     return count_if(nums.begin(), nums.end(), [=](int a) -> bool { return a > n; }); 
 }
 
-
 int main() {
     vector<int> nums{1, 2, 3, 4, 6};
     int n = 2;
