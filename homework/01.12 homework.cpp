@@ -8,6 +8,7 @@ using namespace std;
 
 void start();
 
+// функция создания вектора для всех заданий
 vector<int> createVector() {
     system("cls");
 
@@ -113,6 +114,7 @@ void six(const vector<int> &nums, int n) {
     start();
 }
 
+// стартовая функция выбора заданий
 void start() {
     cout << "Выберите номер задания от 1 до 6: ";
     while (true) {
@@ -161,6 +163,7 @@ void start() {
     }
 }
 
+// включение utf-8 и информирование пользователя
 int main() {
     system("chcp 65001");
     system("cls");
