@@ -2,81 +2,168 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <conio.h>
 
 using namespace std;
 
-int first(const vector<int> &nums, int &n) {
-    return count_if(nums.begin(), nums.end(), [=](int a) -> bool { return a % 2 == 0; });
+void start();
+
+vector<int> createVector() {
+    system("cls");
+
+    vector<int> nums;
+    cout << "Введите числа через пробел (ESC, ENTER - закончить ввод): ";
+    char ch;
+    bool noesc = true;
+    int converted = 0;
+
+    while (noesc) {
+        if (_kbhit()) {
+            ch = _getch();
+
+            if (ch == 27 || ch == '\r') {
+                noesc = false;
+                break;
+            } else if (ch == 32) {
+                nums.push_back(converted);
+                cout << " ";
+                converted = 0;
+                
+            } else if (ch >= '0' && ch <= '9') {
+                converted = converted * 10 + (ch - '0');
+                cout << ch;
+            }
+        }
+    }
+
+    if (converted != 0) {
+        nums.push_back(converted);
+    }
+
+    return nums;
 }
 
-void second(const vector<int> &nums, int n) {
+void one(const vector<int> &nums) {
+    system("cls");
+
+    cout << "Результат: " << count_if(nums.begin(), nums.end(), [](int a) { return a % 2 == 0; }) << endl;
+    start();
+}
+
+void two(const vector<int> &nums, int n) {
+    system("cls");
+
     vector<double> res;
     for (int i = 0; i <= n; ++i) {
-        double sum = accumulate(nums.begin() + i, nums.begin() + (n + i + 1), 0.0);
+        double sum = accumulate(nums.begin() + i, nums.begin() + (i + n), 0.0);
         res.push_back(sum / n);
     }
 
+    cout << "Результат: ";
     for (auto num : res) {
         cout << num << " ";
     }
+    cout << endl;
+    start();
 }
 
-void three(vector<int>& vec) {
-    double avg = accumulate(vec.begin(), vec.end(), 0.0) / vec.size();
-    for (auto num : vec) {
+void three(const vector<int> &nums) {
+    system("cls");
+
+    double avg = accumulate(nums.begin(), nums.end(), 0.0) / nums.size();
+    cout << "Результат: ";
+    for (auto num : nums) {
         cout << num - avg << " ";
     }
+    cout << endl;
+    start();
 }
 
-int four(vector<int> vec) {
+void four(const vector<int> &nums) {
+    system("cls");
+
     vector<int> predResult;
-    copy_if(vec.begin(), vec.end(), back_inserter(predResult), [](int x){return x % 13 == 0 && x != 0;});
-    if (predResult.size() > 0) {
-        return *max_element(predResult.begin(), predResult.end());
+    copy_if(nums.begin(), nums.end(), back_inserter(predResult), [](int x) { return x % 13 == 0 && x != 0; });
+    if (!predResult.empty()) {
+        cout << "Результат: " << *max_element(predResult.begin(), predResult.end()) << endl;
     } else {
-        return -1;
+        cout << "Результат: " << -1 << endl;
     }
+    start();
 }
 
-double five(vector<int> nums) {
-    sort(nums.begin(), nums.end());
-    int size = nums.size();
+void five(const vector<int> &nums) {
+    system ("cls");
+
+    vector<int> sortedNums = nums;
+    sort(sortedNums.begin(), sortedNums.end());
+    int size = sortedNums.size();
     if (size % 2 != 0) {
-        return nums[size / 2];
+        cout << "Результат: " << sortedNums[size / 2] << endl;
     } else {
-        return nums[size / 2 - 1] + nums[size / 2];
+        cout << "Результат: " << (sortedNums[size / 2 - 1] + sortedNums[size / 2]) / 2.0 << endl;
     }
+    start();
 }
 
-int six(const vector<int> &nums, int &n) {
-    return count_if(nums.begin(), nums.end(), [=](int a) -> bool { return a > n; }); 
+void six(const vector<int> &nums, int n) {
+    system("cls");
+
+    cout << "Результат: " << count_if(nums.begin(), nums.end(), [=](int a) { return a > n; }) << endl;
+    start();
+}
+
+void start() {
+    cout << "Выберите номер задания от 1 до 6: ";
+    while (true) {
+        if (kbhit()) {
+            switch (getch()) {
+                case 27:
+                    exit(0);
+                case 49: {
+                    vector<int> nums = createVector();
+                    one(nums);
+                    break;
+                }
+                case 50: {
+                    vector<int> nums = createVector();
+                    int n;
+                    cout << "\nВведите число N (размер шага): ";
+                    cin >> n;
+                    two(nums, n);
+                    break;
+                }
+                case 51: {
+                    vector<int> nums = createVector();
+                    three(nums);
+                    break;
+                }
+                case 52: {
+                    vector<int> nums = createVector();
+                    four(nums);
+                    break;
+                }
+                case 53: {
+                    vector<int> nums = createVector();
+                    five(nums);
+                    break;
+                }
+                case 54: {
+                    vector<int> nums = createVector();
+                    int n;
+                    cout << "\nВведите число N: ";
+                    cin >> n;
+                    six(nums, n);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 int main() {
-    vector<int> nums{1, 2, 3, 4, 6};
-    vector<int> nums1{0, 13, 26, 14, 6};
-
-    // 1
-    int n = 2;
-    cout << "1: " << first(nums, n);
-
-    // 2
-    cout << "\n2: ";
-    second(nums, n);
-
-    // 3
-    cout << "\n3: ";
-    three(nums1);
-
-    // 4
-    cout << "\n4: " << four(nums1);;
-
-    // 5
-    cout << "\n5: " << five(nums1);
-
-    // 6
-    int num = 10;
-    cout << "\n6: ";
-    cout << six(nums1, num);
-    return 0;
+    system("chcp 65001");
+    system("cls");
+    cout << "ESC - Закрыть программу" << endl;
+    start();
 }
