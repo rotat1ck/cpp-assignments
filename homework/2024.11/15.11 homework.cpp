@@ -68,7 +68,8 @@ int main() {
     system("cls");
     cout << "ESC - Закрыть программу" << endl;
     start();
-
+    
+    // 🥨
 }
 
 void one() {

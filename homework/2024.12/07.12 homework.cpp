@@ -55,4 +55,6 @@ int main() {
     
     // вывод параметров phone1
     cout << phone1.brand << "\n" << phone1.model << "\n" << phone1.os << "\n" << phone1.IMEI << "\n" << phone1.manifactDate;
+
+    // 🥨
 }
