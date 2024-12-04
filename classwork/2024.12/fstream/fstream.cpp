@@ -58,4 +58,6 @@ int main() {
     // закрытие файлов
     fromFile.close();
     toFile.close();
+
+    // 🥨
 }

@@ -23,4 +23,6 @@ int main() {
     for (int i : nums) { cout << i << " ";} cout << endl;
     map(nums, [](int item, int index) { return item + index;});
     for (int i : nums) { cout << i << " ";}
+
+    // 🥨
 }

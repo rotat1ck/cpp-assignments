@@ -27,4 +27,6 @@ int main() {
     double a;
     avg(rds, a);
     cout << avg(rds) << endl;
+
+    // 🥨
 }

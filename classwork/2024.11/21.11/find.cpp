@@ -14,4 +14,6 @@ int main() {
         cout << "Позиция: " << distance(number.begin(), max_number);
     }
     return 0;
+
+    // 🥨
 }

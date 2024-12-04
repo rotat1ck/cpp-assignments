@@ -60,4 +60,5 @@ int main() {
     account f = findAccount(acclist, "Oleg Olegovich");
     cout << f.fullName << " " << f.balance;
     
+    // 🥨
 }

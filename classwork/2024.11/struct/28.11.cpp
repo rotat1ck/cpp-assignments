@@ -136,4 +136,5 @@ int main() {
     cout << "Новая крыса: " << endl;
     cout << newrat.speed << " " << newrat.position << " " << newrat.size << " " <<  newrat.name << " " << newrat.age;
 
+    // 🥨
 }
