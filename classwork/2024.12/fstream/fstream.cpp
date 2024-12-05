@@ -20,14 +20,14 @@ int main() {
     ifstream fromFile;
 
     // открытие файла для чтения
-    fromFile.open("C:\\vscode\\cpp-assignments\\classwork\\2024.12\\in.txt");
+    fromFile.open("C:\\vscode\\cpp-assignments\\classwork\\2024.12\\txt's\\in.txt");
     
     // получение первой строки (не использовать)
     // fromFile >> s1;
     // cout << s1;
 
     // открытие файла для записи
-    ofstream toFile("C:\\vscode\\cpp-assignments\\classwork\\2024.12\\out.txt", ofstream::app);
+    ofstream toFile("C:\\vscode\\cpp-assignments\\classwork\\2024.12\\txt's\\out.txt", ofstream::app);
     
     // запись в файл
     toFile << "мяу";
