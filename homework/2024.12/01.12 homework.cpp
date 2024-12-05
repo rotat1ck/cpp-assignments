@@ -44,6 +44,7 @@ vector<int> createVector() {
     return nums;
 }
 
+// 1 🥨
 void one(const vector<int> &nums) {
     system("cls");
 
@@ -51,6 +52,7 @@ void one(const vector<int> &nums) {
     start();
 }
 
+// 2 🥨
 void two(const vector<int> &nums, int n) {
     system("cls");
 
@@ -68,6 +70,7 @@ void two(const vector<int> &nums, int n) {
     start();
 }
 
+// 3 🥨
 void three(const vector<int> &nums) {
     system("cls");
 
@@ -80,6 +83,7 @@ void three(const vector<int> &nums) {
     start();
 }
 
+// 4 🥨
 void four(const vector<int> &nums) {
     system("cls");
 
@@ -93,6 +97,7 @@ void four(const vector<int> &nums) {
     start();
 }
 
+// 5 🥨
 void five(const vector<int> &nums) {
     system ("cls");
 
@@ -107,6 +112,7 @@ void five(const vector<int> &nums) {
     start();
 }
 
+// 6 🥨
 void six(const vector<int> &nums, int n) {
     system("cls");
 
@@ -116,47 +122,41 @@ void six(const vector<int> &nums, int n) {
 
 // стартовая функция выбора заданий
 void start() {
+    vector<char> allowedKeys= {'1', '2', '3', '4', '5', '6'};
     cout << "Выберите номер задания от 1 до 6: ";
     while (true) {
-        if (kbhit()) {
-            switch (getch()) {
-                case 27:
-                    exit(0);
-                case 49: {
-                    vector<int> nums = createVector();
-                    one(nums);
-                    break;
-                }
-                case 50: {
-                    vector<int> nums = createVector();
-                    int n;
-                    cout << "\nВведите число N (размер шага): ";
-                    cin >> n;
-                    two(nums, n);
-                    break;
-                }
-                case 51: {
-                    vector<int> nums = createVector();
-                    three(nums);
-                    break;
-                }
-                case 52: {
-                    vector<int> nums = createVector();
-                    four(nums);
-                    break;
-                }
-                case 53: {
-                    vector<int> nums = createVector();
-                    five(nums);
-                    break;
-                }
-                case 54: {
-                    vector<int> nums = createVector();
-                    int n;
-                    cout << "\nВведите число N: ";
-                    cin >> n;
-                    six(nums, n);
-                    break;
+        if (_kbhit()) {
+            char key = _getch();
+            if (key == 27) {
+                exit(0);
+            } else if (find(allowedKeys.begin(), allowedKeys.end(), key) != allowedKeys.end()){
+                vector<int> nums = createVector();
+                switch(key) {
+                    case '1': {
+                        one(nums);
+                        break;
+                    } case '2': {
+                        int n;
+                        cout << "\nВведите число N (размер шага): ";
+                        cin >> n;
+                        two(nums, n);
+                        break;
+                    } case '3': {
+                        three(nums);
+                        break;
+                    } case '4': {
+                        four(nums);
+                        break;
+                    } case '5': {
+                        five(nums);
+                        break;
+                    } case '6': {
+                        int n;
+                        cout << "\nВведите число N: ";
+                        cin >> n;
+                        six(nums, n);
+                        break;
+                    }
                 }
             }
         }
