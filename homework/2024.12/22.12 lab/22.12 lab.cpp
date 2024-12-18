@@ -30,9 +30,9 @@ ostream& operator<<(ostream& os, const vector<int> &vec) {
 
 // костыль, мне хотелось чтоб одна функция выдавала разные типы данных
 // лучше бы просто сделал две разные функции
-using ResultType = std::variant<std::string, std::vector<int>>;
+using ResultType = variant<string, vector<int>>;
 ResultType readClipboardText(const bool isVector) {
-    std::string temp = "";
+    string temp = "";
     if (OpenClipboard(NULL)) {
         if (IsClipboardFormatAvailable(CF_TEXT)) {
             HGLOBAL hGlob = GetClipboardData(CF_TEXT);
@@ -48,8 +48,8 @@ ResultType readClipboardText(const bool isVector) {
     }
 
     if (isVector) {
-        std::vector<int> clipboardText;
-        std::istringstream iss(temp);
+        vector<int> clipboardText;
+        istringstream iss(temp);
         int number;
         while (iss >> number) {
             clipboardText.push_back(number); 
