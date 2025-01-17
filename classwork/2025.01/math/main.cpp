@@ -16,7 +16,12 @@ double one(double &x, double &y) {
 
 double two(double &v, double &t) {
     const double a = asin(g * t / (2 * v));
-    return a * (90 / Pi);
+    if (a >= -1 && a <= 1) {
+        return a * (90 / Pi);
+    } else {
+        cout << "Error: invalid input" << endl;
+        return -1;
+    }
 }
 
 int three(int num) {
