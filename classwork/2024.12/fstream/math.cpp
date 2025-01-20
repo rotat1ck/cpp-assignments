@@ -62,4 +62,6 @@ int main() {
     cout << "Дисперсия:\t" << getVariance(ivanovNums) << endl;
     cout << "Сред. квадр:\t" << standartDeviation(ivanovNums) << endl;
     cout << "Размах:\t" << getRange(ivanovNums) << endl;
+
+    // 🥨
 }

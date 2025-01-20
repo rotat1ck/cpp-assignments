@@ -33,4 +33,6 @@ int main() {
     person one = {"Олег", 32, 180};
     persList.push_back(one);
     cout << persList;
+
+    // 🥨
 }

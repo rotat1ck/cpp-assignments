@@ -18,4 +18,6 @@ int main() {
     sort(nums.begin(), nums.end());
 
     cout << nums[size - 3];
+
+    // 🥨
 }

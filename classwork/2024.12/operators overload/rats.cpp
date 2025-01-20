@@ -47,4 +47,6 @@ int main() {
     file << nums << endl;
     file.close();
     return 0;
+
+    // 🥨
 }
