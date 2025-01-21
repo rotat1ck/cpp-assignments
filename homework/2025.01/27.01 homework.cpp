@@ -51,3 +51,8 @@ int five(int &limit) {
 }
 
 // 🥨
+
+int main() {
+    double x = 100, y = 10;
+    cout << two(x, y);
+}
