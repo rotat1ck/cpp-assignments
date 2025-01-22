@@ -1,5 +1,5 @@
 #include <iostream>
-#include "C:\vscode\cpp-assignments\random\timer.hpp"
+#include <rotatick/timer.hpp>
 
 using namespace std;
 
