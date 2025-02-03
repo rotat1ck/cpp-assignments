@@ -73,6 +73,8 @@ public:
                 data[i] = temp[i];
             }
             delete[] temp;
+            size++;
+            data[size - 1] = elem;
         } else {
             size++;
             data[size - 1] = elem;
@@ -105,9 +107,17 @@ int main() {
 
     VectorType<int> vec3 = {1, 2, 3};
     
-    vec3.Append(4);
-    vec3.Pop(2);
-    vec3.Append(8);
+    // vec3.Append(4);
+    // vec3.Pop(2);
+    // vec3.Append(8);
+    // for (int i = 0; i < vec3.Size(); ++i) {
+    //     cout << vec3[i] << " ";
+    // }
+
+    for (int i = 0; i < 100; ++i) {
+        vec3.Append(i);
+    }
+
     for (int i = 0; i < vec3.Size(); ++i) {
         cout << vec3[i] << " ";
     }
