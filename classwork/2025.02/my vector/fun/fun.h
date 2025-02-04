@@ -10,3 +10,4 @@
 #define 🆕 new
 #define 🧵 std::thread
 #define 🕹️ std::thread::join
+#define 🍴 for

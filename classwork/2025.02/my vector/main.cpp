@@ -1,24 +1,59 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 template <typename T>
 class VectorType {
 private:
+    class iterator {
+    private:
+        T* ptr;
+    public:
+        iterator() : ptr(nullptr) {};
+        iterator(T* m_ptr = nullptr) : ptr(m_ptr) {};
+
+        iterator& operator =(const iterator&) = default; 
+
+        T& operator *() {return *ptr;}
+
+        iterator& operator ++(int) {
+            iterator tmp(*this);
+            ++ptr;
+            return tmp;
+        }
+
+        iterator& operator ++() {
+            ++ptr;
+            return *this;
+        }
+
+        iterator& operator --(int) {
+            iterator tmp(*this);
+            --ptr;
+            return tmp;
+        }
+
+        iterator& operator --() {
+            --ptr;
+            return *this;
+        }
+
+        iterator& operator -(ptrdiff_t p) {
+            ptr -= p;
+            return *this;
+        }
+
+        iterator& operator +=(ptrdiff_t p) {
+            ptr += p;
+            return *this;
+        }
+    };
+
     int cap;
     int size;
     T* data;
 public:
-    VectorType &operator =(initializer_list<T> init) {
-        cap = init.size() * 2;
-        size = init.size();
-        data = new T[cap];
-        int i = 0;
-        for (auto it = init.begin(); it != init.end(); it++) {
-            data[i++] = *it;
-        }
-        return *this;
-    }
     VectorType() {
         cap = 1;
         size = 0;
@@ -64,27 +99,50 @@ public:
         return data[size - 1];
     }
 
+    VectorType &operator =(initializer_list<T> init) {
+        cap = init.size() * 2;
+        size = init.size();
+        data = new T[cap];
+        int i = 0;
+        for (auto it = init.begin(); it != init.end(); it++) {
+            data[i++] = *it;
+        }
+        return *this;
+    }
+
+    T* Begin() {
+        return data;
+    }
+
+    T* End() {
+        return data + size;
+    }
+
+    void expandCap() {
+        cap *= 2;
+        T* temp = data;
+        data = new T[cap];
+        for (int i = 0; i < size; ++i) {
+            data[i] = temp[i];
+        }
+        delete[] temp;
+    }
+
     void Append(T elem) {
         if (size == cap) {
-            cap *= 2;
-            T* temp = data;
-            data = new T[cap];
-            for (int i = 0; i < size; ++i) {
-                data[i] = temp[i];
-            }
-            delete[] temp;
-            size++;
-            data[size - 1] = elem;
-        } else {
-            size++;
-            data[size - 1] = elem;
+            expandCap();
         }
+        size++;
+        data[size - 1] = elem;
     }
 
     void Pop(int index) {
         if (index > size) {
             return;
         } else {
+            if (size == cap) {
+                expandCap();
+            }
             for (int i = index; i < size - 1; ++i) {
                 data[i] = data[i + 1];
             }
@@ -93,34 +151,54 @@ public:
         }
     }
 
+    void Insert(int index, T elem) {
+        if (index > size) {
+            return;
+        } else {
+            if (size == cap) {
+                expandCap();
+            }
+            for (int i = size; i > index; --i) {
+                data[i] = data[i - 1];
+            }
+            data[index] = elem;
+            size++;
+        }
+    }
+
     int Size() {
         return size;
     }
+
+
 };
 
 int main() {
     VectorType<int> vec = {1, 2, 3, 4, 5};
-    VectorType<int> vec2 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-    // VectorType<int> vec2(vec);
-    // cout << vec[1];
-
-    VectorType<int> vec3 = {1, 2, 3};
     
-    // vec3.Append(4);
-    // vec3.Pop(2);
-    // vec3.Append(8);
-    // for (int i = 0; i < vec3.Size(); ++i) {
-    //     cout << vec3[i] << " ";
+    // for (int i = 0; i < 100; ++i) {
+    //     vec.Append(i);
     // }
 
-    for (int i = 0; i < 100; ++i) {
-        vec3.Append(i);
+    // for (int i = 0; i < vec.Size(); ++i) {
+    //     cout << vec[i] << " ";
+    // }
+
+
+    vec.Insert(2, 10);
+    vec.Insert(2, 11);
+    vec.Insert(2, 12);
+
+    for (int i = 0; i < vec.Size(); ++i) {
+        cout << vec[i] << " ";
     }
 
-    for (int i = 0; i < vec3.Size(); ++i) {
-        cout << vec3[i] << " ";
+    cout << endl;
+    sort(vec.Begin(), vec.End());
+
+    for (int i = 0; i < vec.Size(); ++i) {
+        cout << vec[i] << " ";
     }
-    
+
     return 0;
 }
