@@ -18,7 +18,7 @@ private:
     };
     object* first;
     object* last;
-    int count = 0;
+    int size = 0;
 
 public:
     t& operator[](int index) {
@@ -44,6 +44,36 @@ public:
     }
 
     list() { first = nullptr; last = nullptr; }
+
+    list(int size) {
+        first = nullptr;
+        last = nullptr;
+        for (int i = 0; i < size; ++i) {
+            append(static_cast<t>(0));
+        }
+    }
+
+    list(int size, t data) {
+        first = nullptr;
+        last = nullptr;
+        for (int i = 0; i < size; ++i) {
+            append(data);
+        }
+    }
+
+    list(list& toCopy) {
+        first = nullptr;
+        last = nullptr;
+        if (toCopy.first != nullptr) {
+            object* ptr = toCopy.first;
+            while (ptr != nullptr) {
+                append(ptr->data);
+                ptr = ptr->next;
+            }
+        } else {
+            throw "Cannot copy empty list";
+        }
+    }
 
     list(initializer_list<t> init) {
         first = nullptr;
@@ -72,14 +102,14 @@ public:
             obj->prev = last;
             last = obj;
         }
-        count++;
+        size++;
     }
 
     void add_front(t data) {
         object* obj = new object(data);
         obj->next = first;
         first = obj;
-        count++;
+        size++;
     }
 
     void print() {
@@ -97,7 +127,7 @@ public:
     }
 
     void pop(int index) {
-        if (index < 0 || index >= count) {
+        if (index < 0 || index >= size) {
             throw "Index out of range";
         }
 
@@ -126,7 +156,7 @@ public:
         }
 
         delete ptr;
-        count--;
+        size--;
     }
 };
 
@@ -146,6 +176,15 @@ int main() {
         l2.add_front(0);
         l2.pop(5);
         l2.print();
+
+        list<int> l3(10);
+        l3.print();
+
+        list<int> l4(l2);
+        l4.print();
+
+        list<string> l5(5, "abc");
+        l5.print();
     } catch (const char* ex) {
         cout << "Error: " << ex << endl;
     }
