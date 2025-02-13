@@ -33,7 +33,7 @@ public:
             }
         }
         
-        throw "Index out of range";
+        throw "Index out of bounds";
     }
 
     list& operator=(initializer_list<t> init) {
@@ -126,18 +126,26 @@ public:
         }
     }
 
-    void pop(int index) {
+    object* find(int index) {
         if (index < 0 || index >= size) {
-            throw "Index out of range";
+            throw "Index out of bounds";
         }
-
         object* ptr = first;
         int temp = 0;
         while (ptr != nullptr && temp < index) {
             temp++;
             ptr = ptr->next;
         }
+        return ptr;
+    }
 
+    void pop(int index) {
+        if (index < 0 || index >= size) {
+            throw "Index out of bounds";
+        }
+
+        object* ptr = find(index);
+        
         if (ptr->prev == nullptr) {
             if (ptr->next != nullptr) {
                 first = ptr->next;
@@ -157,6 +165,21 @@ public:
 
         delete ptr;
         size--;
+    }
+
+    void swap(int index1, int index2) {
+        if (index1 < 0 || index1 >= size || index2 < 0 || index2 >= size) {
+            throw "Index out of bounds";
+        } else if (index1 == index2) {
+            return;
+        } 
+
+        object* ptr1 = find(index1);
+        object* ptr2 = find(index2);
+        
+        t temp = ptr1->data;
+        ptr1->data = ptr2->data;
+        ptr2->data = temp;
     }
 };
 
@@ -185,6 +208,10 @@ int main() {
 
         list<string> l5(5, "abc");
         l5.print();
+
+        list<int> l6 = {1, 2, 3, 4};
+        l6.swap(0, 3);
+        l6.print();
     } catch (const char* ex) {
         cout << "Error: " << ex << endl;
     }
