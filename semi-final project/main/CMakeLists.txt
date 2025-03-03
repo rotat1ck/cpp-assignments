@@ -10,6 +10,8 @@ qt_add_resources(RESOURCE_FILES res.qrc)
 qt_add_executable(main
     WIN32 MACOSX_BUNDLE
 
+    ${RESOURCE_FILES}
+
     main.cpp
     src/mainwindow.cpp
     header/mainwindow.h
