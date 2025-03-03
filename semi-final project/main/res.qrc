@@ -1,1 +1,8 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/">
+        <file>fonts/ggsans-Normal.ttf</file>
+        <file>fonts/ggsans-Semibold.ttf</file>
+        <file>img/goidazvon-logo.png</file>
+        <file>img/LoadWheel.gif</file>
+    </qresource>
+</RCC>

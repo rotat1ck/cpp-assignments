@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStackedLayout>
+#include <QWidget>
+
+#include "login.h"
+#include "loadingscreen.h"
 
 class MainWindow : public QMainWindow
 {
@@ -10,5 +15,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private:
+    QStackedLayout* layout;
+    Login* login;
+    LoadingScreen* loadScreen;
 };
 #endif // MAINWINDOW_H
