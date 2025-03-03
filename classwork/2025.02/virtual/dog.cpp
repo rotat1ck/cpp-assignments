@@ -47,4 +47,6 @@ int main() {
     Animal* cat = new Cat();
     cat->Foo();
     delete cat;
+
+    // 🥨
 }
