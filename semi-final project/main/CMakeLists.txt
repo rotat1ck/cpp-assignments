@@ -21,6 +21,9 @@ qt_add_executable(GoidaZvon
     src/mainwindow.cpp
     src/login.cpp
     src/loadingscreen.cpp
+
+    misc/clickQLabel.h
+    misc/clickQLabel.cpp
 )
 
 qt_add_ui(GoidaZvon SOURCES
