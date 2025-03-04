@@ -194,7 +194,7 @@ color: #FFFFFF;
       <string>Password</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="PasswordInput">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -211,6 +211,56 @@ border-radius: 7px;
 font-family: 'gg sans semibold';
 font-size: 16px;
 color: #FFFFFF;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LoginButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>380</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #487FC6;
+border-radius: 10px;
+
+font-family: 'gg sans semibold';
+font-size: 16px;
+line-height: 19px;
+
+color: #FFFFFF;
+
+</string>
+     </property>
+     <property name="text">
+      <string>Login</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="NoAccLabel">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>150</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-family: 'gg sans normal';
+font-size: 12px;
+line-height: 15px;
+
+color: #FFFFFF;
+
+</string>
+     </property>
+     <property name="text">
+      <string>Don’t have an account?</string>
      </property>
     </widget>
    </widget>

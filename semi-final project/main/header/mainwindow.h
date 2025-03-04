@@ -16,6 +16,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void ChangeForm(int formId);
+
 private:
     QStackedLayout* layout;
     Login* login;

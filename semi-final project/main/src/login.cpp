@@ -25,5 +25,10 @@ Login::~Login() {
 }
 
 void Login::ChangeFormToForgot() {
-    qDebug() << "clicked\n";
+    emit S_ChangeForm(1);
 }
+
+void Login::on_LoginButton_clicked() {
+    emit S_ChangeForm(2);
+}
+
