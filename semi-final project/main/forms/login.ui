@@ -39,7 +39,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background: url(:/img/goidazvon-logo.png);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>

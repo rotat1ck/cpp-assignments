@@ -16,6 +16,12 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
+signals:
+    void S_ChangeForm(int formId);
+
+private slots:
+    void ChangeFormToForgot();
+
 private:
     Ui::Login *ui;
 };
