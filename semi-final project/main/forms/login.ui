@@ -142,7 +142,7 @@ color: #FFFFFF;
      </property>
      <property name="styleSheet">
       <string notr="true">font-family: 'gg sans semibold';
-font-size: 14px;
+font-size: 16px;
 line-height: 12px;
 
 color: #FFFFFF;
@@ -183,7 +183,7 @@ color: #FFFFFF;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">font-family: 'gg sans semibold';
-font-size: 14px;
+font-size: 16px;
 line-height: 15px;
 
 color: #FFFFFF;
@@ -230,7 +230,7 @@ color: #FFFFFF;</string>
 border-radius: 10px;
 
 font-family: 'gg sans semibold';
-font-size: 16px;
+font-size: 18px;
 line-height: 19px;
 
 color: #FFFFFF;
@@ -252,7 +252,7 @@ color: #FFFFFF;
      </property>
      <property name="styleSheet">
       <string notr="true">font-family: 'gg sans normal';
-font-size: 12px;
+font-size: 14px;
 line-height: 15px;
 
 color: #FFFFFF;

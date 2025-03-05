@@ -23,14 +23,20 @@ void MainWindow::ChangeForm(int formId) {
     switch(formId) {
     // Login page
     case 0: {
+        qDebug() << "Signal to login page\n";
+        break;
+    // Register page
+    } case 1: {
+        qDebug() << "Signal to register page\n";
         break;
     // Recovery page
-    } case 1: {
+    } case 2: {
         qDebug() << "Signal to recovery page\n";
         break;
-    // End page
-    } case 2:
+    // Final page
+    } case 3: {
         qDebug() << "Signal to final page\n";
         break;
+    }
     }
 }

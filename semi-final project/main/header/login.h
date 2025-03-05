@@ -22,6 +22,8 @@ signals:
 private slots:
     void ChangeFormToForgot();
 
+    void ChangeFormToRegister();
+
     void on_LoginButton_clicked();
 
 private:

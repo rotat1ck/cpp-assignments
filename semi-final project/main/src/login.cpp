@@ -17,18 +17,27 @@ Login::Login(QWidget *parent) :
     ForgotPasswordLabel->setText("Forgot password?");
     ForgotPasswordLabel->setGeometry(10, 200, 110, 20);
 
+    ClickQLabel* Register = new ClickQLabel(ui->LoginWidget);
+    Register->setText("Register");
+    Register->setGeometry(150, 260, 110, 20);
+
     connect(ForgotPasswordLabel, &ClickQLabel::clicked, this, &Login::ChangeFormToForgot);
+    connect(Register, &ClickQLabel::clicked, this, &Login::ChangeFormToRegister);
 }
 
 Login::~Login() {
     delete ui;
 }
 
-void Login::ChangeFormToForgot() {
+void Login::ChangeFormToRegister() {
     emit S_ChangeForm(1);
 }
 
-void Login::on_LoginButton_clicked() {
+void Login::ChangeFormToForgot() {
     emit S_ChangeForm(2);
+}
+
+void Login::on_LoginButton_clicked() {
+    emit S_ChangeForm(3);
 }
 

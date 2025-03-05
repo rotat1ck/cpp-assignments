@@ -4,7 +4,7 @@ ClickQLabel::ClickQLabel(QWidget* parent, Qt::WindowFlags f) : QLabel(parent) {
     setCursor(Qt::PointingHandCursor);
     setStyleSheet(
         "font-family: 'gg sans normal';"
-        "font-size: 12px;"
+        "font-size: 14px;"
         "line-height: 15px;"
         "color: #7C98CB;"
     );
