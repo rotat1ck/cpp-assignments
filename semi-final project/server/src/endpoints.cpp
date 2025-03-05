@@ -1,5 +1,9 @@
 #include "../header/includes.h"
 
+#include "dbContoller.cpp"
+
+Database db("users.db", OPEN_READWRITE|OPEN_CREATE);
+
 void logRequest(const Request& req, Response& res) {
     cout << "["<< req.method <<"] " << "[" << res.status << "] " << 
     "Request by " << req.remote_addr << " to " << req.target << endl;
@@ -9,8 +13,14 @@ void loginFunc(const Request& req, Response& res) {
     try {
         if (req.has_param("username") && req.has_param("pass")) {
             string username = req.get_param_value("username");
-            string password = req.get_param_value("password");
-            res.status = 200;
+            string password = req.get_param_value("pass");
+            try {
+                cout << dbSelectUser(db, username, password) << endl;
+                res.status = 200;
+            } catch (const std::exception& e) {
+                cout << "Error: " << e.what() << endl;
+                res.status = 404;
+            }
         } else {
             res.status = 400;
             res.set_content("Invalid request", "json");
