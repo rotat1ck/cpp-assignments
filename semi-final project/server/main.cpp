@@ -10,10 +10,10 @@
 // Compilation: 
 
 // Windows, MinGW(GCC):
-// g++ main.cpp -o server.exe -lssl -lcrypto -lcrypt32 -lbcrypt -lws2_32 -lSQLiteCpp -lsqlite3
+// g++ main.cpp -o server.exe -lSQLiteCpp -lsqlite3 -lssl -lcrypto -lcrypt32 -lbcrypt -lws2_32 
 
 // Linux GCC:
-// g++ main.cpp -o server -lssl -lcrypto -lSQLiteCpp -lsqlite3
+// g++ main.cpp -o server -lSQLiteCpp -lsqlite3 -lssl -lcrypto
 
 int main() {
     try {

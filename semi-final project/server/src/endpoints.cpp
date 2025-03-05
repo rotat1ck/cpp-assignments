@@ -13,19 +13,19 @@ void loginFunc(const Request& req, Response& res) {
     try {
         if (req.has_param("username") && req.has_param("pass")) {
             string username = req.get_param_value("username");
-            string password = req.get_param_value("pass");
+            string pass = req.get_param_value("pass");
             try {
-                cout << dbSelectUser(db, username, password) << endl;
+                dbSelectUser(db, username, pass);
                 res.status = 200;
-            } catch (const std::exception& e) {
-                cout << "Error: " << e.what() << endl;
+            } catch (const exception& ex) {
                 res.status = 404;
+                res.set_content("User not found", "json");
             }
         } else {
             res.status = 400;
             res.set_content("Invalid request", "json");
         }
-    } catch (const exception& e) {
+    } catch (const exception& ex) {
         res.status = 503;
         res.set_content("Request failed", "json");
     }
@@ -33,7 +33,32 @@ void loginFunc(const Request& req, Response& res) {
 }
 
 void registerFunc(const Request& req, Response& res) {
-    res.set_content("Register", "text/html");
+    try {
+        if (req.has_param("username") && req.has_param("pass") && req.has_param("email")) {
+            string username = req.get_param_value("username");
+            string pass = req.get_param_value("pass");
+            string email = req.get_param_value("email");
+            try {
+                if (dbDoesUserExist(db, username, email)) {
+                    res.status = 400;
+                    res.set_content("User with this username or email already exists", "json");
+                }
+            } catch (const SQLite::Exception& ex) {
+                dbCreateUser(db, username, pass, email);
+                res.status = 200;
+                res.set_content("User created", "json");
+            } catch (const exception& ex) {
+                res.status = 503;
+                res.set_content("Request failed", "json");
+            }
+        } else {
+            res.status = 400;
+            res.set_content("Invalid request", "json");
+        }
+    } catch (const exception& ex) {
+        res.status = 503;
+        res.set_content("Request failed", "json");
+    }
 }
 
 void setEndpoints(SSLServer& svr) {
@@ -46,7 +71,7 @@ void setEndpoints(SSLServer& svr) {
             registerFunc(req, res);
             logRequest(req, res);
         });
-    } catch (const std::exception& e) {
-        cout << "Error: " << e.what() << endl;
+    } catch (const std::exception& ex) {
+        cout << "Error: " << ex.what() << endl;
     }
 }
