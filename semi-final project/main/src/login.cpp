@@ -2,8 +2,6 @@
 #include "ui_login.h"
 #include "../misc/clickQLabel.h"
 
-#include "../misc/httplib.h"
-
 Login::Login(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Login)
@@ -41,6 +39,25 @@ void Login::ChangeFormToForgot() {
 
 void Login::on_LoginButton_clicked() {
     emit S_ShowLoadingScreen(this);
+    QTimer::singleShot(400, this, [this]() {
+        std::string username = "username=" + ui->UsernameInput->text().toUtf8().toStdString();
+        std::string password = "pass=" + ui->PasswordInput->text().toUtf8().toStdString();
 
+        sendRequest(username, password);
+
+        emit S_HideLoadingScreen(this);
+    });
 }
 
+void Login::sendRequest(std::string username, std::string password) {
+    try {
+        httplib::Client cl("https://77.37.246.6:7777");
+        cl.enable_server_certificate_verification(false);
+        std::string endpoint = "/login?" + username + "&" + password;
+
+        auto res = cl.Get(endpoint);
+        qDebug() << "Response status: " << res->status;
+    } catch (const std::exception& ex) {
+        qDebug() << "Exception: " << ex.what();
+    }
+}

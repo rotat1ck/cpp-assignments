@@ -51,13 +51,11 @@ void MainWindow::reInitializeLoadingScreen() {
     loadScreen->hide();
 }
 
-// TODO: add a blur effect to screen when called
 void MainWindow::showLoadScreen(QWidget* caller) {
     loadScreen->show();
-
 }
 
 void MainWindow::hideLoadScreen(QWidget* caller) {
     loadScreen->hide();
-
+    reInitializeLoadingScreen();
 }

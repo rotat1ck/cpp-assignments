@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.19)
 project(GoidaZvon LANGUAGES CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+set (CMAKE_CXX_STANDARD 23)
 
 qt_standard_project_setup()
 
@@ -25,6 +26,7 @@ qt_add_executable(GoidaZvon
     misc/httplib.h
     misc/clickQLabel.h
     misc/clickQLabel.cpp
+    register.h register.cpp register.ui
 )
 
 qt_add_ui(GoidaZvon SOURCES
@@ -40,7 +42,7 @@ target_link_libraries(GoidaZvon
 
 if(WIN32)
     set(LIBRARY_PATH "C:/msys64/ucrt64/lib")
-    link_directories(${LIBRARY_PATH})
+
     target_link_libraries(GoidaZvon PRIVATE
         ${LIBRARY_PATH}/libssl.a
         ${LIBRARY_PATH}/libcrypto.a
@@ -49,9 +51,10 @@ if(WIN32)
         ${LIBRARY_PATH}/libws2_32.a
     )
 elseif(UNIX)
+    find_package(OpenSSL REQUIRED)
     target_link_libraries(GoidaZvon PRIVATE
-        ssl
-        crypto
+        OpenSSL::SSL
+        OpenSSL::Crypto
     )
 endif()
 

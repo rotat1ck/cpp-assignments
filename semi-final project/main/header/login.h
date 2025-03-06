@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#define CPPHTTPLIB_OPENSSL_SUPPORT
+#include "../misc/httplib.h"
+#include <QTimer>
 
 namespace Ui {
 class Login;
@@ -29,6 +32,8 @@ private slots:
     void ChangeFormToRegister();
 
     void on_LoginButton_clicked();
+
+    void sendRequest(std::string username, std::string password);
 
 private:
     Ui::Login *ui;
