@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
     connect(login, &Login::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(login, &Login::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
+
+    connect(registerr, &Registerr::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
+    connect(registerr, &Registerr::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
 }
 
 MainWindow::~MainWindow() {

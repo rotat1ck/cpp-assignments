@@ -42,24 +42,26 @@ void Login::on_LoginButton_clicked() {
     emit S_ShowLoadingScreen(this);
     QTimer::singleShot(400, this, [this]() {
         std::string username = "username=" + ui->UsernameInput->text().toUtf8().toStdString();
-        std::string password = "pass=" + ui->PasswordInput->text().toUtf8().toStdString();
-        std::string passHash = toHash::hash(password);
+        std::string passHash = toHash::hash(ui->PasswordInput->text().toUtf8().toStdString());
+        std::string password = "pass=" + passHash;
 
-        sendRequest(username, passHash);
+        int res = sendRequest(username, password);
+        qDebug() << res;
 
         emit S_HideLoadingScreen(this);
     });
 }
 
-void Login::sendRequest(std::string username, std::string password) {
+int Login::sendRequest(std::string username, std::string password) {
     try {
         httplib::Client cl("https://77.37.246.6:7777");
         cl.enable_server_certificate_verification(false);
         std::string endpoint = "/login?" + username + "&" + password;
 
         auto res = cl.Get(endpoint);
-        qDebug() << "Response status: " << res->status;
+        return res->status;
     } catch (const std::exception& ex) {
         qDebug() << "Exception: " << ex.what();
+        return -1;
     }
 }

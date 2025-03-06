@@ -68,28 +68,27 @@ void Registerr::checkAllParams() {
 void Registerr::on_RegisterButton_clicked() {
     emit S_ShowLoadingScreen(this);
     QTimer::singleShot(400, this, [this]() {
-        std::string email = ui->EmailInput->text().toUtf8().toStdString();
+        std::string email = "email=" + ui->EmailInput->text().toUtf8().toStdString();
         std::string username = "username=" + ui->UsernameInput->text().toUtf8().toStdString();
         std::string passHash = toHash::hash(ui->PasswordInput->text().toUtf8().toStdString());
         std::string password = "pass=" + passHash;
 
-        qDebug() << passHash;
-        sendRequest(email, username, password);
-
+        int res = sendRequest(username, password, email);
+        qDebug() << res;
         emit S_HideLoadingScreen(this);
     });
 }
 
-void Registerr::sendRequest(std::string email, std::string username, std::string password) {
-    qDebug() << password;
-    // try {
-    //     httplib::Client cl("https://77.37.246.6:7777");
-    //     cl.enable_server_certificate_verification(false);
-    //     std::string endpoint = "/login?" + username + "&" + password;
+int Registerr::sendRequest(std::string username, std::string password, std::string email) {
+    try {
+        httplib::Client cl("https://77.37.246.6:7777");
+        cl.enable_server_certificate_verification(false);
+        std::string endpoint = "/register?" + username + "&" + password + "&" + email;
 
-    //     auto res = cl.Get(endpoint);
-    //     qDebug() << "Response status: " << res->status;
-    // } catch (const std::exception& ex) {
-    //     qDebug() << "Exception: " << ex.what();
-    // }
+        auto res = cl.Post(endpoint);
+        return res->status;
+    } catch (const std::exception& ex) {
+        qDebug() << "Exception: " << ex.what();
+        return -1;
+    }
 }

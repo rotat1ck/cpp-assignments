@@ -42,7 +42,7 @@ private slots:
 
     void checkAllParams();
 
-    void sendRequest(std::string email, std::string username, std::string password);
+    int sendRequest(std::string username, std::string password, std::string email);
 
 private:
     Ui::Registerr *ui;

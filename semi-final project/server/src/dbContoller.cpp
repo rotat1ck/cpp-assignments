@@ -12,9 +12,11 @@ bool dbDoesUserExist(Database& db, string username, string email) {
 
 string dbSelectUser(Database& db ,string username, string pass) {
     Transaction transaction(db);
-    Statement query {db, "SELECT user_id FROM users WHERE username = ? AND pass_hash = ?"};
+    Statement query {db, "SELECT user_id FROM users WHERE username = ? AND pass_hash = ? OR email = ? AND pass_hash = ?"};
     query.bind(1, username);
     query.bind(2, pass);
+    query.bind(3, username);
+    query.bind(4, pass);
 
     query.executeStep();
     return query.getColumn(0);

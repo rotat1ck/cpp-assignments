@@ -35,7 +35,7 @@ private slots:
 
     void on_LoginButton_clicked();
 
-    void sendRequest(std::string username, std::string password);
+    int sendRequest(std::string username, std::string password);
 
 private:
     Ui::Login *ui;
