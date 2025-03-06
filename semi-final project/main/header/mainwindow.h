@@ -18,6 +18,9 @@ public:
 
 private slots:
     void ChangeForm(int formId);
+    void reInitializeLoadingScreen();
+    void showLoadScreen(QWidget* caller);
+    void hideLoadScreen(QWidget* caller);
 
 private:
     QStackedLayout* layout;

@@ -52,6 +52,15 @@ border-radius: 20px;
       <height>50</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: 'gg sans semibold';
+font-size: 22px;
+line-height: 12px;
+
+color: #FFFFFF;
+
+</string>
+    </property>
     <property name="text">
      <string>Загрузка...</string>
     </property>

@@ -2,6 +2,8 @@
 #include "ui_login.h"
 #include "../misc/clickQLabel.h"
 
+#include "../misc/httplib.h"
+
 Login::Login(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Login)
@@ -38,6 +40,7 @@ void Login::ChangeFormToForgot() {
 }
 
 void Login::on_LoginButton_clicked() {
-    emit S_ChangeForm(3);
+    emit S_ShowLoadingScreen(this);
+
 }
 

@@ -19,6 +19,10 @@ public:
 signals:
     void S_ChangeForm(int formId);
 
+    void S_ShowLoadingScreen(QWidget* caller);
+
+    void S_HideLoadingScreen(QWidget* caller);
+
 private slots:
     void ChangeFormToForgot();
 

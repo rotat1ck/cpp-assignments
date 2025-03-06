@@ -22,6 +22,7 @@ qt_add_executable(GoidaZvon
     src/login.cpp
     src/loadingscreen.cpp
 
+    misc/httplib.h
     misc/clickQLabel.h
     misc/clickQLabel.cpp
 )
@@ -36,6 +37,23 @@ target_link_libraries(GoidaZvon
         Qt::Core
         Qt::Widgets
 )
+
+if(WIN32)
+    set(LIBRARY_PATH "C:/msys64/ucrt64/lib")
+    link_directories(${LIBRARY_PATH})
+    target_link_libraries(GoidaZvon PRIVATE
+        ${LIBRARY_PATH}/libssl.a
+        ${LIBRARY_PATH}/libcrypto.a
+        ${LIBRARY_PATH}/libcrypt32.a
+        ${LIBRARY_PATH}/libbcrypt.a
+        ${LIBRARY_PATH}/libws2_32.a
+    )
+elseif(UNIX)
+    target_link_libraries(GoidaZvon PRIVATE
+        ssl
+        crypto
+    )
+endif()
 
 include(GNUInstallDirs)
 
