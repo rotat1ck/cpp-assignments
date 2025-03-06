@@ -2,15 +2,19 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     login = new Login(this);
+    registerr = new Registerr(this);
 
     layout = new QStackedLayout;
     layout->addWidget(login);
+    layout->addWidget(registerr);
     layout->setCurrentWidget(login);
 
     loadScreen = new LoadingScreen(this);
+    registerr->hide();
     loadScreen->hide();
 
     connect(login, &Login::S_ChangeForm, this, &MainWindow::ChangeForm);
+    connect(registerr, &Registerr::S_ChangeForm, this, &MainWindow::ChangeForm);
 
     connect(login, &Login::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(login, &Login::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
@@ -26,11 +30,15 @@ void MainWindow::ChangeForm(int formId) {
     switch(formId) {
         // Login page
         case 0: {
-            qDebug() << "Signal to login page\n";
+            layout->setCurrentWidget(login);
+            registerr->hide();
+            login->show();
             break;
         // Register page
         } case 1: {
-            qDebug() << "Signal to register page\n";
+            layout->setCurrentWidget(registerr);
+            registerr->show();
+            login->hide();
             break;
         // Recovery page
         } case 2: {
@@ -41,8 +49,8 @@ void MainWindow::ChangeForm(int formId) {
             qDebug() << "Signal to final page\n";
             break;
         }
-    reInitializeLoadingScreen();
     }
+    reInitializeLoadingScreen();
 }
 
 void MainWindow::reInitializeLoadingScreen() {
@@ -53,9 +61,11 @@ void MainWindow::reInitializeLoadingScreen() {
 
 void MainWindow::showLoadScreen(QWidget* caller) {
     loadScreen->show();
+    caller->setEnabled(false);
 }
 
 void MainWindow::hideLoadScreen(QWidget* caller) {
     loadScreen->hide();
+    caller->setEnabled(true);
     reInitializeLoadingScreen();
 }

@@ -7,6 +7,7 @@
 
 #include "login.h"
 #include "loadingscreen.h"
+#include "registerr.h"
 
 class MainWindow : public QMainWindow
 {
@@ -25,6 +26,7 @@ private slots:
 private:
     QStackedLayout* layout;
     Login* login;
+    Registerr* registerr; // оказывается "register" зарезервированное слово
     LoadingScreen* loadScreen;
 };
 #endif // MAINWINDOW_H

@@ -12,6 +12,7 @@ Login::Login(QWidget *parent) :
     int h = ui->Logo->height();
 
     ui->Logo->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+    ui->PasswordInput->setEchoMode(QLineEdit::Password);
 
     ClickQLabel* ForgotPasswordLabel = new ClickQLabel(ui->LoginWidget);
     ForgotPasswordLabel->setText("Forgot password?");
@@ -42,8 +43,9 @@ void Login::on_LoginButton_clicked() {
     QTimer::singleShot(400, this, [this]() {
         std::string username = "username=" + ui->UsernameInput->text().toUtf8().toStdString();
         std::string password = "pass=" + ui->PasswordInput->text().toUtf8().toStdString();
+        std::string passHash = toHash::hash(password);
 
-        sendRequest(username, password);
+        sendRequest(username, passHash);
 
         emit S_HideLoadingScreen(this);
     });

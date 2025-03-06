@@ -2,10 +2,12 @@
 #define LOGIN_H
 
 #include <QWidget>
+#include <QTimer>
 
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include "../misc/httplib.h"
-#include <QTimer>
+#include "../misc/hasher.h"
+
 
 namespace Ui {
 class Login;
