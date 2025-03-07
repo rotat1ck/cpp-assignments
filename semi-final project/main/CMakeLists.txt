@@ -19,11 +19,13 @@ qt_add_executable(GoidaZvon
     header/login.h
     header/loadingscreen.h
     header/registerr.h
+    header/infobar.h
 
     src/mainwindow.cpp
     src/login.cpp
     src/loadingscreen.cpp
     src/registerr.cpp
+    src/infobar.cpp
 
     misc/httplib.h
     misc/clickQLabel.h
@@ -36,6 +38,7 @@ qt_add_ui(GoidaZvon SOURCES
     forms/login.ui
     forms/loadingscreen.ui
     forms/registerr.ui
+    forms/infobar.ui
 )
 
 target_link_libraries(GoidaZvon

@@ -10,23 +10,31 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     layout->setCurrentWidget(login);
 
     loadScreen = new LoadingScreen(this);
+    infobar = new InfoBar(this, "");
     registerr->hide();
     loadScreen->hide();
+    infobar->hide();
 
     connect(login, &Login::S_ChangeForm, this, &MainWindow::ChangeForm);
     connect(registerr, &Registerr::S_ChangeForm, this, &MainWindow::ChangeForm);
 
     connect(login, &Login::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(login, &Login::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
+    connect(login, &Login::S_Infobar, this, &MainWindow::InfoBarDisplay);
+
 
     connect(registerr, &Registerr::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(registerr, &Registerr::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
+    connect(registerr, &Registerr::S_Infobar, this, &MainWindow::InfoBarDisplay);
+    connect(registerr, &Registerr::S_ReturnToLogin, this, &MainWindow::returnFromRegister);
 }
 
 MainWindow::~MainWindow() {
     delete layout;
     delete login;
     delete loadScreen;
+    delete registerr;
+    delete infobar;
 }
 
 void MainWindow::ChangeForm(int formId) {
@@ -53,13 +61,16 @@ void MainWindow::ChangeForm(int formId) {
             break;
         }
     }
-    reInitializeLoadingScreen();
+    reInitializePopUps();
 }
 
-void MainWindow::reInitializeLoadingScreen() {
+void MainWindow::reInitializePopUps() {
     delete loadScreen;
+    delete infobar;
     loadScreen = new LoadingScreen(this);
+    infobar = new InfoBar(this, "");
     loadScreen->hide();
+    infobar->hide();
 }
 
 void MainWindow::showLoadScreen(QWidget* caller) {
@@ -70,5 +81,22 @@ void MainWindow::showLoadScreen(QWidget* caller) {
 void MainWindow::hideLoadScreen(QWidget* caller) {
     loadScreen->hide();
     caller->setEnabled(true);
-    reInitializeLoadingScreen();
+}
+
+void MainWindow::InfoBarDisplay(QWidget* caller, std::string infoMessage, bool isFailure) {
+    qDebug() << "Called";
+    infobar->show();
+    infobar->displayMessage(infoMessage, isFailure);
+    QTimer::singleShot(3000, this, [this]() {
+        infobar->hide();
+    });
+}
+
+void MainWindow::returnFromRegister(QWidget *parent, std::string infoMessage) {
+    ChangeForm(0);
+    infobar->show();
+    infobar->displayMessage(infoMessage, false);
+    QTimer::singleShot(3000, this, [this]() {
+        infobar->hide();
+    });
 }

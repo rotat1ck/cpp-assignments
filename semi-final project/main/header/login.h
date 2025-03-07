@@ -23,10 +23,9 @@ public:
 
 signals:
     void S_ChangeForm(int formId);
-
     void S_ShowLoadingScreen(QWidget* caller);
-
     void S_HideLoadingScreen(QWidget* caller);
+    void S_Infobar(QWidget* caller, std::string infoMessage, bool isFailure);
 
 private slots:
     void ChangeFormToForgot();

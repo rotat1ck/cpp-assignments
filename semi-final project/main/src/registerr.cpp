@@ -74,7 +74,6 @@ void Registerr::on_RegisterButton_clicked() {
         std::string password = "pass=" + passHash;
 
         int res = sendRequest(username, password, email);
-        qDebug() << res;
         emit S_HideLoadingScreen(this);
     });
 }
@@ -86,6 +85,11 @@ int Registerr::sendRequest(std::string username, std::string password, std::stri
         std::string endpoint = "/register?" + username + "&" + password + "&" + email;
 
         auto res = cl.Post(endpoint);
+        if (res->status != 200) {
+            emit S_Infobar(this, res->body, true);
+        } else {
+            emit S_ReturnToLogin(this, res->body);
+        }
         return res->status;
     } catch (const std::exception& ex) {
         qDebug() << "Exception: " << ex.what();

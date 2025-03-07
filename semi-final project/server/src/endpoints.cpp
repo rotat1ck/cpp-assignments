@@ -17,6 +17,7 @@ void loginFunc(const Request& req, Response& res) {
             try {
                 dbSelectUser(db, username, pass);
                 res.status = 200;
+                res.set_content("Successful login", "json");
             } catch (const exception& ex) {
                 res.status = 404;
                 res.set_content("User not found", "json");

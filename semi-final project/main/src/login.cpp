@@ -46,7 +46,6 @@ void Login::on_LoginButton_clicked() {
         std::string password = "pass=" + passHash;
 
         int res = sendRequest(username, password);
-        qDebug() << res;
 
         emit S_HideLoadingScreen(this);
     });
@@ -59,6 +58,11 @@ int Login::sendRequest(std::string username, std::string password) {
         std::string endpoint = "/login?" + username + "&" + password;
 
         auto res = cl.Get(endpoint);
+        if (res->status != 200) {
+            emit S_Infobar(this, res->body, true);
+        } else {
+            emit S_Infobar(this, res->body, false);
+        }
         return res->status;
     } catch (const std::exception& ex) {
         qDebug() << "Exception: " << ex.what();
