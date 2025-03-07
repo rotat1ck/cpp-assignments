@@ -35,7 +35,7 @@ void Login::ChangeFormToRegister() {
 }
 
 void Login::ChangeFormToForgot() {
-    emit S_ChangeForm(2);
+    emit S_ShowRecoveryInfoBar(this, "HAHAHAHAHAHAHAHA");
 }
 
 void Login::on_LoginButton_clicked() {
@@ -61,7 +61,8 @@ int Login::sendRequest(std::string username, std::string password) {
         if (res->status != 200) {
             emit S_Infobar(this, res->body, true);
         } else {
-            emit S_Infobar(this, res->body, false);
+            qDebug() << "Go to final";
+            emit S_GotoFinalPage(this, res->body);
         }
         return res->status;
     } catch (const std::exception& ex) {

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FinalPage</class>
+ <widget class="QWidget" name="FinalPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>900</width>
+     <height>650</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: #313338;
+</string>
+   </property>
+   <widget class="QWidget" name="FinalWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>246</x>
+      <y>180</y>
+      <width>400</width>
+      <height>290</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #707070;
+border-radius: 15px;
+</string>
+    </property>
+    <widget class="QLabel" name="Label">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>95</y>
+       <width>300</width>
+       <height>110</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-family: 'gg sans semibold';
+font-size: 16px;
+line-height: 17px;
+
+color: #FFFFFF;
+
+</string>
+     </property>
+     <property name="text">
+      <string>GOIDA GOIDA GOIDA GOIDA GOIDA
+GOIDA GOIDA GOIDA GOIDA GOIDA
+GOIDA GOIDA GOIDA GOIDA GOIDA
+GOIDA GOIDA GOIDA GOIDA GOIDA
+GOIDA GOIDA GOIDA GOIDA GOIDA
+GOIDA GOIDA GOIDA GOIDA GOIDA
+</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BackButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>7</y>
+       <width>50</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #5D5656;
+border-radius: 10px;
+
+font-family: 'gg sans semibold';
+font-size: 14px;
+line-height: 17px;
+
+color: #FFFFFF;</string>
+     </property>
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="Logo">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>50</y>
+      <width>70</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="GoidaZvonLabel">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>60</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: 'gg sans semibold';
+font-size: 30px;
+line-height: 36px;
+
+color: #FFFFFF;
+
+</string>
+    </property>
+    <property name="text">
+     <string>GoidaZvon</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

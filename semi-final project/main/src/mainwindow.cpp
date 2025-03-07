@@ -3,25 +3,31 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     login = new Login(this);
     registerr = new Registerr(this);
+    finalpage = new FinalPage(this);
 
     layout = new QStackedLayout;
     layout->addWidget(login);
     layout->addWidget(registerr);
+    layout->addWidget(finalpage);
     layout->setCurrentWidget(login);
 
     loadScreen = new LoadingScreen(this);
     infobar = new InfoBar(this, "");
+
     registerr->hide();
+    finalpage->hide();
     loadScreen->hide();
     infobar->hide();
 
     connect(login, &Login::S_ChangeForm, this, &MainWindow::ChangeForm);
     connect(registerr, &Registerr::S_ChangeForm, this, &MainWindow::ChangeForm);
+    connect(finalpage, &FinalPage::S_ChangeForm, this, &MainWindow::ChangeForm);
 
     connect(login, &Login::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(login, &Login::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
     connect(login, &Login::S_Infobar, this, &MainWindow::InfoBarDisplay);
-
+    connect(login, &Login::S_GotoFinalPage, this, &MainWindow::gotoFinalPage);
+    connect(login, &Login::S_ShowRecoveryInfoBar, this, &MainWindow::showRecoveryInfoBar);
 
     connect(registerr, &Registerr::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(registerr, &Registerr::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
@@ -43,6 +49,7 @@ void MainWindow::ChangeForm(int formId) {
         case 0: {
             layout->setCurrentWidget(login);
             registerr->hide();
+            finalpage->hide();
             login->show();
             break;
         // Register page
@@ -50,14 +57,14 @@ void MainWindow::ChangeForm(int formId) {
             layout->setCurrentWidget(registerr);
             registerr->show();
             login->hide();
-            break;
-        // Recovery page
-        } case 2: {
-            qDebug() << "Signal to recovery page\n";
+            finalpage->hide();
             break;
         // Final page
         } case 3: {
-            qDebug() << "Signal to final page\n";
+            layout->setCurrentWidget(finalpage);
+            finalpage->show();
+            login->hide();
+            registerr->hide();
             break;
         }
     }
@@ -84,7 +91,6 @@ void MainWindow::hideLoadScreen(QWidget* caller) {
 }
 
 void MainWindow::InfoBarDisplay(QWidget* caller, std::string infoMessage, bool isFailure) {
-    qDebug() << "Called";
     infobar->show();
     infobar->displayMessage(infoMessage, isFailure);
     QTimer::singleShot(3000, this, [this]() {
@@ -92,11 +98,16 @@ void MainWindow::InfoBarDisplay(QWidget* caller, std::string infoMessage, bool i
     });
 }
 
-void MainWindow::returnFromRegister(QWidget *parent, std::string infoMessage) {
+void MainWindow::returnFromRegister(QWidget *caller, std::string infoMessage) {
     ChangeForm(0);
-    infobar->show();
-    infobar->displayMessage(infoMessage, false);
-    QTimer::singleShot(3000, this, [this]() {
-        infobar->hide();
-    });
+    InfoBarDisplay(caller, infoMessage, false);
+}
+
+void MainWindow::gotoFinalPage(QWidget *caller, std::string infoMessage) {
+    ChangeForm(3);
+    InfoBarDisplay(caller, infoMessage, false);
+}
+
+void MainWindow::showRecoveryInfoBar(QWidget *caller, std::string infoMessage) {
+    InfoBarDisplay(caller, infoMessage, true);
 }

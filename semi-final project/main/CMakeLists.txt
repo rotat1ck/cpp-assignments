@@ -20,12 +20,16 @@ qt_add_executable(GoidaZvon
     header/loadingscreen.h
     header/registerr.h
     header/infobar.h
+    header/finalpage.h
+
 
     src/mainwindow.cpp
     src/login.cpp
     src/loadingscreen.cpp
     src/registerr.cpp
     src/infobar.cpp
+    src/finalpage.cpp
+
 
     misc/httplib.h
     misc/clickQLabel.h
@@ -39,6 +43,7 @@ qt_add_ui(GoidaZvon SOURCES
     forms/loadingscreen.ui
     forms/registerr.ui
     forms/infobar.ui
+    forms/finalpage.ui
 )
 
 target_link_libraries(GoidaZvon
@@ -49,7 +54,6 @@ target_link_libraries(GoidaZvon
 
 if(WIN32)
     set(LIBRARY_PATH "C:/msys64/ucrt64/lib")
-
     target_link_libraries(GoidaZvon PRIVATE
         ${LIBRARY_PATH}/libssl.a
         ${LIBRARY_PATH}/libcrypto.a

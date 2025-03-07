@@ -1,4 +1,4 @@
-#include "../header/Registerr.h"
+#include "../header/registerr.h"
 #include "ui_registerr.h"
 
 Registerr::Registerr(QWidget *parent) :
