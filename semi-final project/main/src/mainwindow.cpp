@@ -19,15 +19,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     loadScreen->hide();
     infobar->hide();
 
-    connect(login, &Login::S_ChangeForm, this, &MainWindow::ChangeForm);
-    connect(registerr, &Registerr::S_ChangeForm, this, &MainWindow::ChangeForm);
-    connect(finalpage, &FinalPage::S_ChangeForm, this, &MainWindow::ChangeForm);
+    connect(login, &Login::S_ChangeForm, this, ChangeForm);
+    connect(registerr, &Registerr::S_ChangeForm, this, ChangeForm);
+    connect(finalpage, &FinalPage::S_ChangeForm, this, ChangeForm);
 
     connect(login, &Login::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(login, &Login::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
-    connect(login, &Login::S_Infobar, this, &MainWindow::InfoBarDisplay);
+    connect(login, &Login::S_Infobar, this, InfoBarDisplay);
     connect(login, &Login::S_GotoFinalPage, this, &MainWindow::gotoFinalPage);
-    connect(login, &Login::S_ShowRecoveryInfoBar, this, &MainWindow::showRecoveryInfoBar);
+    connect(login, &Login::S_ShowRecoveryInfoBar, this, showRecoveryInfoBar);
 
     connect(registerr, &Registerr::S_HideLoadingScreen, this, &MainWindow::hideLoadScreen);
     connect(registerr, &Registerr::S_ShowLoadingScreen, this, &MainWindow::showLoadScreen);
